@@ -1,0 +1,12 @@
+# 安装 docker 密钥
+run-command install -m 0755 -d /etc/apt/keyrings
+run-command curl -fsSL https://mirrors.cernet.edu.cn/docker-ce/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+run-command chmod a+r /etc/apt/keyrings/docker.gpg
+
+run-command sh -c 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://mirrors.cernet.edu.cn/docker-ce/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | tee /etc/apt/sources.list.d/docker.list'
+
+# 更新 apt 数据
+update
+
+# 安装
+install docker-ce

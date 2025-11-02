@@ -1,0 +1,22 @@
+# 安装 nvidia 官方源
+run-command wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+run-command dpkg -i cuda-keyring_1.1-1_all.deb
+delete /cuda-keyring_1.1-1_all.deb
+
+# 更新 apt 数据
+update
+
+# 安装显卡驱动及依赖
+install nvidia-headless-570-server-open,nvidia-utils-570-server,cuda-toolkit-12-4,nvidia-container-toolkit
+
+run-command nvidia-ctk runtime configure --runtime=docker
+
+append-line /etc/profile.d/cuda.sh:export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+append-line /etc/profile.d/cuda.sh:export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+# 启用显卡持久化服务
+run-command mkdir /etc/systemd/system/nvidia-persistenced.service.d
+append-line /etc/systemd/system/nvidia-persistenced.service.d/override.conf:[Service]
+append-line /etc/systemd/system/nvidia-persistenced.service.d/override.conf:ExecStart=
+append-line /etc/systemd/system/nvidia-persistenced.service.d/override.conf:ExecStart=/usr/bin/nvidia-persistenced --user nvidia-persistenced
+run-command systemctl enable nvidia-persistenced

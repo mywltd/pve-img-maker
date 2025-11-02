@@ -1,0 +1,9 @@
+# 缓存清理步骤
+run-command apt clean
+run-command fstrim -a
+
+delete /var/log/*.log
+delete /var/lib/apt/lists/*
+delete /var/cache/apt/*
+
+truncate /etc/machine-id
