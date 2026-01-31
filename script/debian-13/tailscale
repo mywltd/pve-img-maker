@@ -1,7 +1,7 @@
 # 配置 tailscale
 run-command wget -q https://pkgs.tailscale.com/stable/debian/trixie.noarmor.gpg -O /usr/share/keyrings/tailscale-archive-keyring.gpg
 run-command wget -q https://pkgs.tailscale.com/stable/debian/trixie.tailscale-keyring.list -O /etc/apt/sources.list.d/tailscale.list
-run-command sed -i 's,pkgs.tailscale.com/stable,mirrors.cernet.edu.cn/tailscale,g' /etc/apt/sources.list.d/tailscale.list
+run-command sed -i 's,pkgs.tailscale.com/stable,debian.mirrors.ovh.net/tailscale,g' /etc/apt/sources.list.d/tailscale.list
 
 # 更新 apt 数据
 update
