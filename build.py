@@ -8,7 +8,7 @@ from datetime import datetime
 import curses
 
 # === Configuration ===
-IMAGE_SIZE = '32G'
+IMAGE_SIZE = '20G'
 DOWNLOAD_DIR = os.path.abspath('./download')
 OUTPUT_DIR = os.path.abspath('./output')
 WORKDIR_BASE = '/dev/shm/build'
