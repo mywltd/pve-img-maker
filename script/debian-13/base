@@ -7,13 +7,13 @@ run-command update-grub
 delete /etc/apt/sources.list
 delete /etc/apt/sources.list.d/debian.sources
 append-line /etc/apt/sources.list.d/debian.sources:Types: deb
-append-line /etc/apt/sources.list.d/debian.sources:URIs: https://mirrors.cernet.edu.cn/debian
+append-line /etc/apt/sources.list.d/debian.sources:URIs: https://debian.mirrors.ovh.net/debian
 append-line /etc/apt/sources.list.d/debian.sources:Suites: stable stable-updates stable-backports
 append-line /etc/apt/sources.list.d/debian.sources:Components: main contrib non-free non-free-firmware
 append-line /etc/apt/sources.list.d/debian.sources:Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 append-line /etc/apt/sources.list.d/debian.sources:
 append-line /etc/apt/sources.list.d/debian.sources:Types: deb
-append-line /etc/apt/sources.list.d/debian.sources:URIs: https://mirrors.cernet.edu.cn/debian-security
+append-line /etc/apt/sources.list.d/debian.sources:URIs: https://debian.mirrors.ovh.net/debian-security
 append-line /etc/apt/sources.list.d/debian.sources:Suites: stable-security
 append-line /etc/apt/sources.list.d/debian.sources:Components: main contrib non-free non-free-firmware
 append-line /etc/apt/sources.list.d/debian.sources:Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
@@ -25,7 +25,7 @@ run-command apt full-upgrade -y
 # 安装基础软件包
 install sudo,qemu-guest-agent,wget,curl,net-tools,nano,vim,tmux,htop,btop,nethogs,iftop,ncdu,axel,fish,arp-scan,nmap,unar
 
-# 禁止 root 用户通过 ssh 登录
-append-line /etc/ssh/sshd_config.d/00-user-init.conf:PermitRootLogin no
-# 禁止 使用密码登录
-append-line /etc/ssh/sshd_config.d/00-user-init.conf:PasswordAuthentication no
+# 允许 root 用户通过 ssh 登录
+append-line /etc/ssh/sshd_config.d/00-user-init.conf:PermitRootLogin yes
+# 允许 使用密码登录
+append-line /etc/ssh/sshd_config.d/00-user-init.conf:PasswordAuthentication yes
